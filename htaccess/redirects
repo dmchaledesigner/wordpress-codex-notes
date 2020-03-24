@@ -1,0 +1,52 @@
+Transferring from old domain to new domain
+=============================
+
+If you had an old domain such as example.com, and now you decided you actually want to use example.net for the website.
+You could setup a 301 redirect for the entire domain, so that old links to example.com carry over.
+
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^example.com [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.example.com [NC]
+RewriteRule ^(.*)$ http://example.net/$1 [L,R=301,NC]
+
+
+
+Force one type of domain to be used
+=============================
+
+A search engine like Google would see example.com and www.example.com as essentially two separate websites.
+They recommend you pick one version you'd like search engines to display and using a 301 redirect is a possible option.
+
+If you have a lot of links on the web where people are linking to your site as example.com,
+but you would like your visitors to instead end up at www.example.com you can force this version of your domain with these rules:
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^example.com [NC]
+RewriteRule ^(.*)$ http://www.example.com/$1 [L,R=301,NC]
+
+
+
+
+Redirect individual files
+=============================
+
+To redirect individual files, like example.com/oldfile.htm to newfile.htm you can use a 301 redirect like this:
+
+Redirect 301 /oldfile.htm /newfile.html
+
+
+
+
+
+Redirect all links to the home page
+=============================
+
+
+
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^/(index.html)?$
+RewriteCond %{REQUEST_URI} !.(gif|jpeg|png|css|js)$
+RewriteRule .* / [L,R=302]
+

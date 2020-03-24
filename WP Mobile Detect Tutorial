@@ -1,0 +1,56 @@
+WP Mobile Detect Tutorial
+
+Install WP Mobile Detect plugin
+
+Create a header for mobile along with the standard header file you'll have.
+
+This is the standard function...
+
+<?php if (function_exists('wpmd_is_phone') && wpmd_is_phone()) :?>
+This will show if there is a phone
+ <?php else : ?>
+This will show if it is anything but a phone
+ <?php endif; ?>
+
+
+In our site homepage use this code in replace of it its standard
+
+
+<?php
+/**
+ * Template Name: Home
+ *
+ */
+
+
+?>
+
+<?php
+    if (function_exists('wpmd_is_phone') && wpmd_is_phone()) {
+             get_header('mobile');
+
+    } else {
+        get_header();
+    }
+?>
+
+    
+<div class="container content">
+    
+    <p>This is some text in the body of the home page</p>
+    
+</div>
+
+
+    
+<?php get_footer(); ?>
+
+
+
+
+
+
+
+
+
+

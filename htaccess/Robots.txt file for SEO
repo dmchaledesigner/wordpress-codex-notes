@@ -1,0 +1,17 @@
+Robots.txt file for SEO
+
+In Joast => Create xml sitemap using Google XML Sitemap Plugin
+
+Go to Edit Files => and Create Sitemap.
+
+Create the Robots.txt file and add the below.
+Remembe to insert the site domain of choice
+
+
+
+Code:
+
+http://www.mysite.ie/sitemap_index.xml
+
+User-agent: *
+Disallow: /wp-admin/

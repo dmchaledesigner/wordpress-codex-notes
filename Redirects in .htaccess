@@ -1,0 +1,15 @@
+Redirects in .htaccess
+
+
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^/index.html$
+RewriteCond %{REQUEST_URI} !\.(gif|jpe?g|png|css|js)$
+RewriteRule .* /index.html [L,R=302]
+
+if that doen't work try this
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.html?path=$1 [NC,L,QSA]

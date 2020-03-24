@@ -1,0 +1,244 @@
+................................
+ADDING BOOTSTRAP
+................................
+
+    Go to 'customize' in on getbootstrap.com
+    download at bottom of the page.
+
+    Keep minified versions and full versions of bootstrap.css and bootstrap.js
+
+    add to the <head> in header.php as shown below
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel= "stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+	<link rel= "stylesheet" href="css/styles.css" type="text/css" />
+	
+    add to the footer.php 
+	<!-- the javascript-->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+    NOTE: the META NAME is needed for responsive design. (listed above the styles above)
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+................................
+
+THE GRID SYSTEM
+................................
+
+
+Bootstrap used HTML 5 and we can use sections, article tags etc to split up our page.
+
+ie
+
+<header class="container">
+</header>
+
+
+<article class="container">
+            <section class="row">
+                     <article class="col-md-4">
+                     </article>
+
+                     <article class="col-md-4">
+                     </article>
+
+                     <article class="col-md-4">
+                     </article>
+
+            </section>  
+
+ </article>           
+
+<footer class="container">
+    <section class="row">
+                     <article class="col-md-12">
+                     </article>
+    </section> 
+ </footer>   
+
+
+................................................................
+
+THE GRID SYSTEM SECTION DIVISIONS
+................................................................
+
+First of all we have <div class='container'>... this is our page division lengthwise.
+Its our playground for adding in rows, nested rows or even nested containers.
+
+Next we have <div class="row">....
+this is our next port of thinking. how many rows we need in our container??
+learn how to split and divide up our site and think about containers, rows and columns
+Each row contains a total of 12 columns!
+
+Columns.
+After our class of container DIV and our ROW DIV, we have a class of cols.
+Split up your colums into different widths, once they total 12.
+        
+        <div class="row">
+               <div class="cols-md-6"></div>
+                 <div class="cols-md-6"></div>
+        </div>
+
+        or
+
+        <div class="row">
+ie              <div class="cols-md-4"></div>
+                 <div class="cols-md-4"></div>
+                 <div class="cols-md-4"></div>
+        </div>
+
+
+
+
+Mobile....
+
+For mobile we have the class of "col-sm-12" and/or "col-xs-12" which will make whatever column we have created,
+expand into full width of the container. 
+
+So we could have something like this:
+
+
+<div class="container-fluid"> //full width container
+
+    <div class="container"> //Bootstrap set width of 1140px centered
+
+            <div class="row">
+                       <div class="cols-md-6 col-sm-12"></div>
+                         <div class="cols-md-6 colsm-12"></div>
+                </div>
+
+    </div>
+</div>
+ ................................................................
+
+THE NAVWALKER for WORDPRESS
+................................................................
+
+
+DOWNLOAD the Bootstrap navwalker folder
+
+Copy navwalker.php file into the themes folder.
+
+Add this code to functions.php to initialise the navwalker.
+
+/* -- Bootstrap Navwalker -- */
+require_once('wp_bootstrap_navwalker.php');
+
+Go into the dashboard of wordress and create a new menu, say 'primary'.
+Create pages and add them to your menu.
+
+Now for wordpress to necognise this menu we need to call it into our functions.php file,
+and then call it using html into our page where we want it displayed.
+
+add to functions.php..
+
+/* --Registering the primary nav -- */
+register_nav_menus( array(
+    'primary' => __( 'Primary Menu', 'Main' ),
+) );
+
+
+add to our page template..
+
+
+ <!-- Navigation Primary -->
+
+                    <nav class="navbar navbar-inverse centered" role="navigation" id="primary_navigation">
+                           <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                              </button>
+                                    </div>
+
+
+                                                    <?php
+                                                             wp_nav_menu( array(
+                                                            'menu'              => 'primary',
+                                                            'theme_location'    => 'primary',
+                                                            'depth'             => 2,
+                                                            'container'         => 'div',
+                                                            'container_class'   => 'collapse navbar-collapse',
+                                                            'container_id'      => 'bs-example-navbar-collapse-1',
+                                                            'menu_class'        => 'nav navbar-nav',
+                                                            'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+                                                            'walker'            => new wp_bootstrap_navwalker())
+                                                             );
+                                                    ?>
+
+
+
+                             </div>
+                </nav>
+
+
+  <!-- Close Navigation Primary -->
+
+  NOTE that our 'menu' is also called primary, the same as in the functions.php file.
+  To create another menu, simply create one using a different name and add the same code we used for the functions.php above
+  for that menu alone, just change the name and we're done.
+
+  We can also alter the class name in the second section of the html here.
+  Where   'menu_class'        => 'nav navbar-nav',
+  we could have   'menu_class'        => 'nav navbar-nav-primary',
+  to identify it for CSS styling.
+
+  
+
+................................................................
+
+THE CSS
+................................................................
+Design for mobile first (XS, less than 480px)
+Add HS (Horizontal Small Devices) classes in your HTML: col-hs-*, visible-hs, ... and design for horizontal mobile devices (HS, less than 768px)
+Design for tablet devices (SM, less than 992px)
+Design for desktop devices (MD, less than 1200px)
+Design for large devices (LG, more than 1200px)
+
+Desktop:
+
+@media (min-width: 768px) {
+
+    // CSS Rules here   
+
+    }
+
+
+Mobile:
+
+@media only screen and (min-width:0) and (max-width:768px){
+
+//CSS rules here
+
+}
+
+
+................................................................
+
+Centering your nagivation links in Bootstrap
+................................................................
+
+Usually we can use a class of navbar-left, or navbar-right to position the bootstrap navigation links,
+but since these are pre-defined rules on bootstrap.css we can over write these rules in our own custom css file.
+
+within our desktop media query, use this code to centre our navigation.
+
+   .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+    }
+
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
+
+    
+note: they will reposition themselves as default, once scaled down to mobile therefore we wont need to repair the new rules we just set.
+other styles can be used for mobile for positioning etc if need be.
+
